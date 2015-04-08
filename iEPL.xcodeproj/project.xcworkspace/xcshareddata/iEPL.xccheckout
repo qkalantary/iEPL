@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C136E5AF-7FAA-48FF-BDCD-5AAB25D1AD58</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iEPL</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5EDF6B1FB0FA3600A618DBF127E2AA7B20E85A04</key>
+		<string>https://github.com/qkalantary/iEPL.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iEPL.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5EDF6B1FB0FA3600A618DBF127E2AA7B20E85A04</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/qkalantary/iEPL.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5EDF6B1FB0FA3600A618DBF127E2AA7B20E85A04</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5EDF6B1FB0FA3600A618DBF127E2AA7B20E85A04</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iEPL</string>
+		</dict>
+	</array>
+</dict>
+</plist>

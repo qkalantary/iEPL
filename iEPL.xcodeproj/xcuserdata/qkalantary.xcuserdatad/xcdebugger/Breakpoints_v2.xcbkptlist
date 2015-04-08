@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FreeRecall0.m"
-            timestampString = "445383348.745704"
+            timestampString = "450210272.66644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iEPL/FreeRecallWordShow.m"
-            timestampString = "448397664.489189"
+            timestampString = "450211882.612665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "-startWordDisplay"
             landmarkType = "5">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iEPL/FreeRecallWordShow.m"
-            timestampString = "448397664.489189"
+            timestampString = "450044805.042688"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -104,13 +104,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iEPL/FreeRecallWordShow.m"
-            timestampString = "448397664.489189"
+            timestampString = "450211882.612665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-audioRecorderDidFinishRecording:successfully:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iEPL/FreeRecallWordShow.m"
+            timestampString = "450211882.612665"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "-wordShuffle"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FreeRecall0.m"
+            timestampString = "450049732.699589"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "instructionText"
+            landmarkType = "19">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[FreeRecall0 instructionText]"
+                  moduleName = "iEPL"
+                  urlString = "file:///Users/qkalantary/iEPL/FreeRecall0.m"
+                  timestampString = "450048750.418467"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "10">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[FreeRecall0 setInstructionText:]"
+                  moduleName = "iEPL"
+                  urlString = "file:///Users/qkalantary/iEPL/FreeRecall0.m"
+                  timestampString = "450048750.418885"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

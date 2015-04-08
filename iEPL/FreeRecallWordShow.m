@@ -33,6 +33,8 @@
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
 
+
+
 @end
 
 @implementation FreeRecallWordShow
@@ -51,7 +53,9 @@
     self.stopButton.hidden = YES;
     self.recordPauseButton.hidden = YES;
 
-    self.loopNumber = [[NSNumber alloc] initWithInt:1];
+    self.loopNumber = [[NSNumber alloc] initWithInt:0];
+    
+    
     // Disable Stop/Play button when application launches
     [self.stopButton setEnabled:NO];
     [self.playButton setEnabled:NO];
@@ -59,7 +63,7 @@
     // Set the audio file
     NSArray *pathComponents = [NSArray arrayWithObjects:
                                [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"MyAudioMemo.m4a",
+                               @"MyAudioMemo.wav",
                                nil];
     NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
     
@@ -68,27 +72,83 @@
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     
     // Define the recorder setting
-    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
+    NSDictionary *audioSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   [NSNumber numberWithFloat:44100],AVSampleRateKey,
+                                   [NSNumber numberWithInt: kAudioFormatLinearPCM],AVFormatIDKey,
+                                   [NSNumber numberWithInt: 1],AVNumberOfChannelsKey,
+                                   [NSNumber numberWithInt:AVAudioQualityMedium],AVEncoderAudioQualityKey,nil];
     
-    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
-    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
     
     // Initiate and prepare the recorder
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:audioSettings error:NULL];
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
     [self.recorder prepareToRecord];
+    
+    
+    //set dummy userName
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    int userName = (int)[defaults integerForKey:@"userName"];
+    userName++;
+    [defaults setInteger:userName forKey:@"userName"];
+    
+    [defaults synchronize];
+    
     
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    
     [self startWordDisplay];
-    
-    
 }
+
+-(void)wordShuffle {
+    NSString *fileName = [self.loopNumber stringValue];
+    
+    NSString* path = [[NSBundle mainBundle] pathForResource:fileName
+                                                     ofType:@"txt"];
+    
+    NSString* content = [NSString stringWithContentsOfFile:path
+                                                  encoding:NSUTF8StringEncoding
+                                                     error:NULL];
+    
+
+    
+    NSString *sep = @"\t\n";
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:sep];
+    NSArray *temp=[content componentsSeparatedByCharactersInSet:set];
+    NSLog(@"temp=%@",temp);
+    
+    int x = getRandomInteger(1, (int)temp.count);
+    NSMutableArray *mut = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 12; i++) {
+        x = getRandomInteger(1, (int)temp.count - 1);
+        if ([self doesContain:temp[x] withArr:mut]) {
+            i--;
+        } else {
+            [mut addObject:temp[x]];
+        }
+    }
+    NSArray *final = mut;
+    
+    if ([self.loopNumber integerValue] == 0) {
+        final = temp;
+    }
+    
+    self.keyArray = final;
+}
+
+-(BOOL)doesContain:(NSString*)string withArr:(NSMutableArray*)arr {
+    for (int i = 0; i < arr.count; i++) {
+        if ([arr[i] isEqualToString:string]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -102,6 +162,13 @@ int getRandomInteger(int minimum, int maximum) {
 
 
 -(void)startWordDisplay {
+    
+    
+    //shuffle words
+    [self wordShuffle];
+    
+    
+    //start timer and call displayWord
         [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
                                    selector:@selector(displayWord:)
@@ -110,15 +177,37 @@ int getRandomInteger(int minimum, int maximum) {
 
 }
 
+-(void) displayWord:(NSTimer *)timer {
+    static int i;
+    NSLog(@"displaying Word");
+    //dispatch_async(dispatch_get_main_queue(), ^{
+    NSLog(@"%@", self.keyArray[i]);
+    self.wordShow.text =  self.keyArray[i];
+    //});
+    i++;
+    if (self.keyArray.count == i) {
+        i = 0;
+        [timer invalidate];
+        
+        [self startMathDisplay];
+    }
+}
+
 -(void)startMathDisplay {
     
     [self displayMath];
+    
+    //configure timing for mathDisplay
+    [NSTimer scheduledTimerWithTimeInterval:1.0
+                                     target:self
+                                   selector:@selector(endMathDisplay:)
+                                   userInfo:nil
+                                    repeats:YES];
+
 }
 
 -(void)displayMath {
-    static int i;
-
-    
+    //static int i;
     
     int x = getRandomInteger(1, 9);
     int y = getRandomInteger(1, 9);
@@ -133,17 +222,22 @@ int getRandomInteger(int minimum, int maximum) {
     self.mathInput.hidden = NO;
     
     
-    i++;
-    if (i > 20) {
-        i = 0;
-        [self recordResponse];
-        return;
-    }
+    //i++;
+    //if (i > 20) {
+    //  i = 0;
+    //}
     
     [self.mathInput becomeFirstResponder];
-
-    
 }
+
+-(void)endMathDisplay:(NSTimer *) timer {
+    NSLog(@"Math Display Ended");
+    
+    [timer invalidate];
+    [self recordResponse];
+}
+
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     //input math question
@@ -158,24 +252,6 @@ int getRandomInteger(int minimum, int maximum) {
     return NO;
 }
 
-
-
--(void) displayWord:(NSTimer *)timer {
-    static int i;
-    NSLog(@"displaying Word");
-    //dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"%@", self.keyArray[i]);
-        self.wordShow.text =  [self.wordData objectForKey: self.keyArray[i]];
-    //});
-    i++;
-    if (self.keyArray.count == i) {
-        i = 0;
-        [timer invalidate];
-        
-        [self startMathDisplay];
-    }
-}
-
 -(void)recordResponse {
     NSLog(@"response");
     self.mathProblem.hidden = YES;
@@ -186,7 +262,6 @@ int getRandomInteger(int minimum, int maximum) {
     self.wordShow.text = @"*****************";
     
     //time to record
-    
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setActive:YES error:nil];
     
@@ -222,32 +297,57 @@ int getRandomInteger(int minimum, int maximum) {
         }
     }
     
+    NSString *listContents = @"";
+    for (NSString *string in self.keyArray) {
+        NSString *tmp = [NSString stringWithFormat:@"%@\n",string];
+        listContents = [listContents stringByAppendingString:tmp];
+    }
+    NSData* listData = [listContents dataUsingEncoding:NSUTF8StringEncoding];
+    
     
     NMSFTP *ftp = [NMSFTP connectWithSession:session];
-//    NSString* str = @"teststring2";
-//    NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding];
-    [ftp appendContents:audioData toFileAtPath:@"/home2/qkal/test3"];
-    
-    NSLog(@"contents");
     
     
+    //userName:
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int loopInt = (int)[self.loopNumber integerValue];
+    int userName = (int)[defaults integerForKey:@"userName"];
+    NSString *newDirectoryA = [NSString stringWithFormat:@"/home2/qkal/iEPL/LTP%i",userName];
+    NSString *newDirectoryB = [NSString stringWithFormat:@"/home2/qkal/iEPL/LTP%i/session%i",userName,loopInt];
+    NSString *audioString = [NSString stringWithFormat:@"/home2/qkal/iEPL/LTP%i/session%i/audio.wav",userName,loopInt];
+    NSString *listString = [NSString stringWithFormat:@"/home2/qkal/iEPL/LTP%i/session%i/listString.lst",userName,loopInt];
     
+    //create new directory for user
+    [ftp createDirectoryAtPath:newDirectoryA];
+    
+    //creates directory for each session
+    [ftp createDirectoryAtPath:newDirectoryB];
+
+    
+    //append audio data to the file
+    [ftp appendContents:audioData toFileAtPath:audioString];
+    
+    //append list to file
+    [ftp appendContents:listData toFileAtPath:listString];
+
     [session disconnect];
     
     
 }
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Done"
-    //                                                    message: @"Finish playing the recording!"
-    //                                                   delegate: nil
-    //                                          cancelButtonTitle:@"OK"
-    //                                          otherButtonTitles:nil];
-    //[alert show];
-    int i = [self.loopNumber intValue];
-    i++;
-    self.loopNumber = [NSNumber numberWithInt:i];
+
+    
+    //increment loop
+    self.loopNumber = [NSNumber numberWithInt:[self.loopNumber intValue] + 1];
+    
+    if ([self.loopNumber integerValue] == 1) {
+        NSLog(@"loop");
+        self.wordShow.text = [NSString stringWithFormat:@"Are you ready for part 1 (if not, please tell the proctor)"];
+    } else {
+    
     self.wordShow.text = [NSString stringWithFormat:@"Are you ready for part %@",self.loopNumber];
+    }
     self.agreeButton.hidden = NO;
 }
 
@@ -263,6 +363,18 @@ int getRandomInteger(int minimum, int maximum) {
     
     [self startWordDisplay];
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

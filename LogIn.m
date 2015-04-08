@@ -11,7 +11,7 @@
 @interface LogIn ()
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-
+@property int x;
 @end
 
 @implementation LogIn
@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.x = 2;
 }
 
 - (void)didReceiveMemoryWarning {

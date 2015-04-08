@@ -9,6 +9,27 @@
 /* Begin PBXBuildFile section */
 		1806BDB91A928F6500C4A5C5 /* LogIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1806BDB81A928F6500C4A5C5 /* LogIn.m */; };
 		1806BDBC1A9291CB00C4A5C5 /* SignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 1806BDBB1A9291CB00C4A5C5 /* SignUp.m */; };
+		182058221AD5A259009D772F /* instructions.mov in Resources */ = {isa = PBXBuildFile; fileRef = 182058211AD5A259009D772F /* instructions.mov */; };
+		182058241AD5AE5F009D772F /* 0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182058231AD5AE5F009D772F /* 0.txt */; };
+		182ED20C1ACC7819002EE712 /* 3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED1FC1ACC7819002EE712 /* 3.txt */; };
+		182ED20D1ACC7819002EE712 /* 4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED1FD1ACC7819002EE712 /* 4.txt */; };
+		182ED20E1ACC7819002EE712 /* 5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED1FE1ACC7819002EE712 /* 5.txt */; };
+		182ED20F1ACC7819002EE712 /* 6.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED1FF1ACC7819002EE712 /* 6.txt */; };
+		182ED2101ACC7819002EE712 /* 7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2001ACC7819002EE712 /* 7.txt */; };
+		182ED2111ACC7819002EE712 /* 8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2011ACC7819002EE712 /* 8.txt */; };
+		182ED2121ACC7819002EE712 /* 9.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2021ACC7819002EE712 /* 9.txt */; };
+		182ED2131ACC7819002EE712 /* 10.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2031ACC7819002EE712 /* 10.txt */; };
+		182ED2141ACC7819002EE712 /* 11.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2041ACC7819002EE712 /* 11.txt */; };
+		182ED2151ACC7819002EE712 /* 12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2051ACC7819002EE712 /* 12.txt */; };
+		182ED2161ACC7819002EE712 /* 13.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2061ACC7819002EE712 /* 13.txt */; };
+		182ED2171ACC7819002EE712 /* 14.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2071ACC7819002EE712 /* 14.txt */; };
+		182ED2181ACC7819002EE712 /* 15.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2081ACC7819002EE712 /* 15.txt */; };
+		182ED2191ACC7819002EE712 /* 16.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED2091ACC7819002EE712 /* 16.txt */; };
+		182ED21A1ACC7819002EE712 /* 17.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED20A1ACC7819002EE712 /* 17.txt */; };
+		182ED21B1ACC7819002EE712 /* 18.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED20B1ACC7819002EE712 /* 18.txt */; };
+		182ED2511AD33489002EE712 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 182ED2501AD33489002EE712 /* MediaPlayer.framework */; };
+		185156E11AC3439500E97F80 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 185156DF1AC3439500E97F80 /* 1.txt */; };
+		185156E21AC3439500E97F80 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 185156E01AC3439500E97F80 /* 2.txt */; };
 		18EDFCB91A82B2C300F2576F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDFCB81A82B2C300F2576F /* main.m */; };
 		18EDFCBC1A82B2C300F2576F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDFCBB1A82B2C300F2576F /* AppDelegate.m */; };
 		18EDFCBF1A82B2C300F2576F /* iEPL.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18EDFCBD1A82B2C300F2576F /* iEPL.xcdatamodeld */; };
@@ -40,6 +61,27 @@
 		1806BDB81A928F6500C4A5C5 /* LogIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogIn.m; path = ../LogIn.m; sourceTree = "<group>"; };
 		1806BDBA1A9291CB00C4A5C5 /* SignUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUp.h; sourceTree = "<group>"; };
 		1806BDBB1A9291CB00C4A5C5 /* SignUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUp.m; sourceTree = "<group>"; };
+		182058211AD5A259009D772F /* instructions.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = instructions.mov; sourceTree = "<group>"; };
+		182058231AD5AE5F009D772F /* 0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 0.txt; sourceTree = "<group>"; };
+		182ED1FC1ACC7819002EE712 /* 3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3.txt; sourceTree = "<group>"; };
+		182ED1FD1ACC7819002EE712 /* 4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 4.txt; sourceTree = "<group>"; };
+		182ED1FE1ACC7819002EE712 /* 5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5.txt; sourceTree = "<group>"; };
+		182ED1FF1ACC7819002EE712 /* 6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 6.txt; sourceTree = "<group>"; };
+		182ED2001ACC7819002EE712 /* 7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 7.txt; sourceTree = "<group>"; };
+		182ED2011ACC7819002EE712 /* 8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 8.txt; sourceTree = "<group>"; };
+		182ED2021ACC7819002EE712 /* 9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 9.txt; sourceTree = "<group>"; };
+		182ED2031ACC7819002EE712 /* 10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 10.txt; sourceTree = "<group>"; };
+		182ED2041ACC7819002EE712 /* 11.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 11.txt; sourceTree = "<group>"; };
+		182ED2051ACC7819002EE712 /* 12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 12.txt; sourceTree = "<group>"; };
+		182ED2061ACC7819002EE712 /* 13.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 13.txt; sourceTree = "<group>"; };
+		182ED2071ACC7819002EE712 /* 14.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 14.txt; sourceTree = "<group>"; };
+		182ED2081ACC7819002EE712 /* 15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 15.txt; sourceTree = "<group>"; };
+		182ED2091ACC7819002EE712 /* 16.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 16.txt; sourceTree = "<group>"; };
+		182ED20A1ACC7819002EE712 /* 17.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 17.txt; sourceTree = "<group>"; };
+		182ED20B1ACC7819002EE712 /* 18.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 18.txt; sourceTree = "<group>"; };
+		182ED2501AD33489002EE712 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		185156DF1AC3439500E97F80 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
+		185156E01AC3439500E97F80 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
 		18EDFCB31A82B2C300F2576F /* iEPL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEPL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EDFCB71A82B2C300F2576F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18EDFCB81A82B2C300F2576F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -69,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				182ED2511AD33489002EE712 /* MediaPlayer.framework in Frameworks */,
 				18FDC4001AB7812500F509C2 /* CFNetwork.framework in Frameworks */,
 				18FDC3FE1AB7811B00F509C2 /* libz.dylib in Frameworks */,
 				18FDC3FC1AB7807200F509C2 /* NMSSH.framework in Frameworks */,
@@ -89,6 +132,7 @@
 		18EDFCAA1A82B2C300F2576F = {
 			isa = PBXGroup;
 			children = (
+				182ED2501AD33489002EE712 /* MediaPlayer.framework */,
 				18FDC3FF1AB7812500F509C2 /* CFNetwork.framework */,
 				18FDC3FD1AB7811B00F509C2 /* libz.dylib */,
 				18FDC3FB1AB7807200F509C2 /* NMSSH.framework */,
@@ -111,6 +155,26 @@
 		18EDFCB51A82B2C300F2576F /* iEPL */ = {
 			isa = PBXGroup;
 			children = (
+				182058211AD5A259009D772F /* instructions.mov */,
+				182058231AD5AE5F009D772F /* 0.txt */,
+				185156DF1AC3439500E97F80 /* 1.txt */,
+				185156E01AC3439500E97F80 /* 2.txt */,
+				182ED1FC1ACC7819002EE712 /* 3.txt */,
+				182ED1FD1ACC7819002EE712 /* 4.txt */,
+				182ED1FE1ACC7819002EE712 /* 5.txt */,
+				182ED1FF1ACC7819002EE712 /* 6.txt */,
+				182ED2001ACC7819002EE712 /* 7.txt */,
+				182ED2011ACC7819002EE712 /* 8.txt */,
+				182ED2021ACC7819002EE712 /* 9.txt */,
+				182ED2031ACC7819002EE712 /* 10.txt */,
+				182ED2041ACC7819002EE712 /* 11.txt */,
+				182ED2051ACC7819002EE712 /* 12.txt */,
+				182ED2061ACC7819002EE712 /* 13.txt */,
+				182ED2071ACC7819002EE712 /* 14.txt */,
+				182ED2081ACC7819002EE712 /* 15.txt */,
+				182ED2091ACC7819002EE712 /* 16.txt */,
+				182ED20A1ACC7819002EE712 /* 17.txt */,
+				182ED20B1ACC7819002EE712 /* 18.txt */,
 				18EDFCBA1A82B2C300F2576F /* AppDelegate.h */,
 				18EDFCBB1A82B2C300F2576F /* AppDelegate.m */,
 				1806BDB71A928F6500C4A5C5 /* LogIn.h */,
@@ -239,7 +303,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				182ED21A1ACC7819002EE712 /* 17.txt in Resources */,
+				182ED2131ACC7819002EE712 /* 10.txt in Resources */,
+				182ED21B1ACC7819002EE712 /* 18.txt in Resources */,
+				182058221AD5A259009D772F /* instructions.mov in Resources */,
+				182ED2191ACC7819002EE712 /* 16.txt in Resources */,
+				182ED2121ACC7819002EE712 /* 9.txt in Resources */,
+				182ED2181ACC7819002EE712 /* 15.txt in Resources */,
+				182ED2141ACC7819002EE712 /* 11.txt in Resources */,
+				182ED2111ACC7819002EE712 /* 8.txt in Resources */,
+				182ED20F1ACC7819002EE712 /* 6.txt in Resources */,
+				182058241AD5AE5F009D772F /* 0.txt in Resources */,
+				182ED2171ACC7819002EE712 /* 14.txt in Resources */,
+				182ED2151ACC7819002EE712 /* 12.txt in Resources */,
+				182ED20E1ACC7819002EE712 /* 5.txt in Resources */,
+				182ED20C1ACC7819002EE712 /* 3.txt in Resources */,
+				182ED2161ACC7819002EE712 /* 13.txt in Resources */,
+				185156E11AC3439500E97F80 /* 1.txt in Resources */,
+				182ED2101ACC7819002EE712 /* 7.txt in Resources */,
+				185156E21AC3439500E97F80 /* 2.txt in Resources */,
 				18EDFCC81A82B2C300F2576F /* Main.storyboard in Resources */,
+				182ED20D1ACC7819002EE712 /* 4.txt in Resources */,
 				18EDFCCD1A82B2C300F2576F /* LaunchScreen.xib in Resources */,
 				18EDFCCA1A82B2C300F2576F /* Images.xcassets in Resources */,
 			);

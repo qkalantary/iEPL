@@ -9,12 +9,20 @@
 #import "FreeRecall0.h"
 #import <AVFoundation/AVAudioSession.h>
 #import "FreeRecallWordShow.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface FreeRecall0 ()
 @property (weak, nonatomic) IBOutlet UIButton *affirmButton;
 @property (weak, nonatomic) IBOutlet UITextView *instructionText;
 @property (strong, nonatomic) NSArray *keyArray;
 @property (strong, nonatomic) NSDictionary *wordList;
+
+@property (strong,nonatomic) NSString *instructString;
+@property (strong,nonatomic) NSString *micString;
+@property (strong,nonatomic) NSString *movieString;
+@property (strong,nonatomic) NSString *experimentString;
+
+
 
 @end
 
@@ -23,6 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.instructString = @"Click This After You Read Above Info";
+    self.micString = @"Allow Mic Access";
+    self.movieString = @"Watch Movie";
+    self.experimentString = @"Continue to Demo";
     
     NSDictionary *wordList = [NSDictionary dictionaryWithObjectsAndKeys:
                       @"11111", @"word1",
@@ -64,30 +76,37 @@
 - (IBAction)clickButton:(id)sender {
 
     //intro sequence of instructions
-    if ([self.affirmButton.currentTitle  isEqual: @"Click This After You Read Above Info"]) {
-        self.instructionText.text = @"Please allow the Mic. It's going to be used for important recording purposes. Just trust us. We're scientists.";
-        CGRect frame = self.instructionText.frame;
-        frame.size = self.instructionText.contentSize;
-        self.instructionText.frame = frame;
+    if ([self.affirmButton.currentTitle  isEqual: self.instructString]) {
         
-        [self.affirmButton setTitle:@"Allow Mic Access" forState:UIControlStateNormal];
+//        CGRect frame = self.instructionText.frame;
+//        frame.size = self.instructionText.contentSize;
+//        self.instructionText.frame = frame;
+        
+        self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
+        self.instructionText.textAlignment = NSTextAlignmentCenter;
+        
+        self.instructionText.text = @"Please allow the Mic. It is necessary to run the Free Recall Experiment";
+        
+        self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
+        self.instructionText.textAlignment = NSTextAlignmentCenter;
+        
+        
+        [self.affirmButton setTitle:self.micString forState:UIControlStateNormal];
 
-    } else if ([self.affirmButton.currentTitle  isEqual: @""]) {
         
         
-        
-        
-        [self.affirmButton setTitle:@"Allow Mic Access" forState:UIControlStateNormal];
-    } else if ([self.affirmButton.currentTitle  isEqual: @"Allow Mic Access"]) {
+    } else if ([self.affirmButton.currentTitle  isEqual:self.micString]) {
         NSLog(@"mic access allow pressed");
         
         PermissionBlock permissionBlock = ^(BOOL granted) {
             if (granted)
             {
                 //[self doActualRecording];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self performSegueWithIdentifier:@"list" sender:self];
-                });
+                self.instructionText.text = @"Now watch this instructional video";
+                [self.affirmButton setTitle:self.movieString forState:UIControlStateNormal];
+                
+                self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
+                self.instructionText.textAlignment = NSTextAlignmentCenter;
             }
             else
             {
@@ -108,8 +127,35 @@
         }
         else
         {
-            
+            NSLog(@"lower than ios 7 you've got to be kidding me");
         }
+    } else if ([self.affirmButton.currentTitle isEqualToString:self.movieString]) {
+
+        NSString *path = [NSString stringWithFormat:@"%@/%@",
+                          [[NSBundle mainBundle] resourcePath], @"instructions.mov"];
+        NSLog(@"Path of video file: %@", path);
+        
+        NSURL *url = [NSURL fileURLWithPath:path];
+        
+        MPMoviePlayerViewController *vc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+        vc.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+        
+        [self presentMoviePlayerViewControllerAnimated:vc];
+        [vc.moviePlayer prepareToPlay];
+        [vc.moviePlayer play];
+        
+        
+        self.instructionText.text = @"Please talk to the proctor if you have any questions. You will now go through a short demo session of the experiment.";
+        self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
+        self.instructionText.textAlignment = NSTextAlignmentCenter;
+        
+        [self.affirmButton setTitle:self.experimentString forState:UIControlStateNormal];
+        
+    } else if ([self.affirmButton.currentTitle isEqualToString:self.experimentString]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"list" sender:self];
+        });
+
     }
 }
 
