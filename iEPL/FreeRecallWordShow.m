@@ -9,10 +9,21 @@
 #import "FreeRecallWordShow.h"
 #import <AVFoundation/AVFoundation.h>
 #import <NMSSH/NMSSH.h>
+#import "NSMutableArray+shuffle.h"
+#import <OpenEars/OELanguageModelGenerator.h>
+#import <OpenEars/OEAcousticModel.h>
+#import <OpenEars/OEPocketsphinxController.h>
+#import <OpenEars/OEAcousticModel.h>
+#import <OpenEars/OEEventsObserver.h>
+
+#define RECORD_LENGTH 10.0
+#define MATH_LENGTH 10.0
+#define WORD_INTERVAL 1.3
 
 
 
-@interface FreeRecallWordShow () <UITextFieldDelegate, AVAudioSessionDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+
+@interface FreeRecallWordShow () <UITextFieldDelegate, AVAudioSessionDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate,OEEventsObserverDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *mathProblem;
 @property (weak, nonatomic) IBOutlet UITextField *mathInput;
 @property (weak, nonatomic) IBOutlet UILabel *wordShow;
@@ -24,10 +35,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 @property (weak, nonatomic) IBOutlet UIButton *recordPauseButton;
 
+@property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
+
 @property NSNumber *loopNumber;
 
 @property NSString* mathInputAnswer;
 @property int sessionPlace;
+
+@property int countDownNumber;
+
 
 
 @property AVAudioRecorder *recorder;
@@ -42,12 +58,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.countDownNumber = 3;
+    
     self.mathInput.delegate = self;
     
     self.mathProblem.hidden = YES;
     self.mathInput.hidden = YES;
     self.agreeButton.hidden = YES;
     self.textOut.hidden = YES;
+    self.wordShow.hidden = YES;
    
     self.playButton.hidden = YES;
     self.stopButton.hidden = YES;
@@ -91,6 +110,7 @@
     
     int userName = (int)[defaults integerForKey:@"userName"];
     userName++;
+    NSLog(@"USERNAME: %i", userName);
     [defaults setInteger:userName forKey:@"userName"];
     
     [defaults synchronize];
@@ -99,12 +119,25 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
-    [self startWordDisplay];
+    [NSTimer scheduledTimerWithTimeInterval:WORD_INTERVAL
+                                     target:self
+                                   selector:@selector(countDown:)
+                                   userInfo:nil
+                                    repeats:YES];
 }
 
 -(void)wordShuffle {
-    NSString *fileName = [self.loopNumber stringValue];
+    int fileNumber;
+    if ([self.loopNumber integerValue] == 0) {
+        fileNumber = 0;
+        self.keyArray =
+  @[@"+", @"ATTIC",@"BEAM",@"CAMEL",@"CHEST",@"COTTON",@"FLOOD",@"IRON",@"RHINO",@"RING",@"TONGUE",@"WAGON",@"WATCH"];
+        return;
+    }
+    
+    fileNumber = getRandomInteger(1, 18);
+    
+    NSString *fileName = [NSString stringWithFormat:@"%i",fileNumber];
     
     NSString* path = [[NSBundle mainBundle] pathForResource:fileName
                                                      ofType:@"txt"];
@@ -115,26 +148,31 @@
     
 
     
-    NSString *sep = @"\t\n";
-    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:sep];
-    NSArray *temp=[content componentsSeparatedByCharactersInSet:set];
-    NSLog(@"temp=%@",temp);
+    NSString *sepLine = @"\n";
+    NSCharacterSet *setLine = [NSCharacterSet characterSetWithCharactersInString:sepLine];
+    NSArray *lineArray=[content componentsSeparatedByCharactersInSet:setLine];
+    NSLog(@"lineArray=%@",lineArray);
+    int lineArrayRandomNumber = getRandomInteger(0, 24);
     
-    int x = getRandomInteger(1, (int)temp.count);
+    NSString *wordString = lineArray[lineArrayRandomNumber];
+    
+    NSString *sepWord = @"\t";
+    NSCharacterSet *setWord = [NSCharacterSet characterSetWithCharactersInString:sepWord];
+    NSArray *wordArray=[wordString componentsSeparatedByCharactersInSet:setWord];
+    NSLog(@"before shuffle=%@", wordArray);
+    
     NSMutableArray *mut = [[NSMutableArray alloc] init];
     for (int i = 0; i < 12; i++) {
-        x = getRandomInteger(1, (int)temp.count - 1);
-        if ([self doesContain:temp[x] withArr:mut]) {
-            i--;
-        } else {
-            [mut addObject:temp[x]];
-        }
+            [mut addObject:wordArray[i]];
     }
-    NSArray *final = mut;
     
-    if ([self.loopNumber integerValue] == 0) {
-        final = temp;
-    }
+    [mut shuffle];
+    
+    [mut insertObject:@"+" atIndex:0];
+    
+    NSLog(@"after shuffle=%@", mut);
+    
+    NSArray *final = mut;
     
     self.keyArray = final;
 }
@@ -169,7 +207,7 @@ int getRandomInteger(int minimum, int maximum) {
     
     
     //start timer and call displayWord
-        [NSTimer scheduledTimerWithTimeInterval:1.0
+        [NSTimer scheduledTimerWithTimeInterval:WORD_INTERVAL
                                      target:self
                                    selector:@selector(displayWord:)
                                    userInfo:nil
@@ -178,12 +216,13 @@ int getRandomInteger(int minimum, int maximum) {
 }
 
 -(void) displayWord:(NSTimer *)timer {
+    self.textOut.hidden = YES;
+
+    
     static int i;
     NSLog(@"displaying Word");
-    //dispatch_async(dispatch_get_main_queue(), ^{
     NSLog(@"%@", self.keyArray[i]);
     self.wordShow.text =  self.keyArray[i];
-    //});
     i++;
     if (self.keyArray.count == i) {
         i = 0;
@@ -193,12 +232,31 @@ int getRandomInteger(int minimum, int maximum) {
     }
 }
 
+-(void) countDown:(NSTimer *)timer {
+    self.textOut.hidden = NO;
+    self.wordShow.hidden = NO;
+    self.textOut.text = @"Countdown";
+    self.textOut.font = [UIFont boldSystemFontOfSize:25.0];
+    self.textOut.textAlignment = NSTextAlignmentCenter;
+    
+    self.wordShow.text = [NSString stringWithFormat:@"%i", self.countDownNumber];
+    
+    
+    self.countDownNumber--;
+
+    if (self.countDownNumber == -1) {
+        [timer invalidate];
+        self.countDownNumber = 3;
+        [self startWordDisplay];
+    }
+}
+
 -(void)startMathDisplay {
     
     [self displayMath];
     
     //configure timing for mathDisplay
-    [NSTimer scheduledTimerWithTimeInterval:1.0
+    [NSTimer scheduledTimerWithTimeInterval:MATH_LENGTH
                                      target:self
                                    selector:@selector(endMathDisplay:)
                                    userInfo:nil
@@ -254,6 +312,40 @@ int getRandomInteger(int minimum, int maximum) {
 
 -(void)recordResponse {
     NSLog(@"response");
+
+    
+    
+    //Language model
+    OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
+    
+    NSArray *words = [NSArray arrayWithObjects:@"Attic", @"Beam", @"Camel", @"Chest", @"Cotton", @"Iron", @"Rhino", @"Flood", @"Ring", nil];
+    NSString *name = @"NameIWantForMyLanguageModelFiles";
+    NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]]; // Change "AcousticModelEnglish" to "AcousticModelSpanish" to create a Spanish language model instead of an English one.
+    
+    NSString *lmPath = nil;
+    NSString *dicPath = nil;
+    
+    if(err == nil) {
+        
+        lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"NameIWantForMyLanguageModelFiles"];
+        dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"NameIWantForMyLanguageModelFiles"];
+        
+    } else {
+        NSLog(@"Error: %@",[err localizedDescription]);
+    }
+    
+    //
+    [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+    [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO]; // Change "AcousticModelEnglish" to "AcousticModelSpanish" to perform Spanish recognition instead of English.
+    
+    
+    //
+    self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
+    [self.openEarsEventsObserver setDelegate:self];
+    
+    
+    
+    
     self.mathProblem.hidden = YES;
     self.mathInput.hidden = YES;
     [self.mathInput resignFirstResponder];
@@ -267,22 +359,23 @@ int getRandomInteger(int minimum, int maximum) {
     
     NSLog(@"before recording");
     // Start recording
-    [self.recorder recordForDuration:10.0];
+    [self.recorder recordForDuration:RECORD_LENGTH];
     
     NSLog(@"after recording");
     
     
-//    self.recordPauseButton.hidden = NO;
-//    self.playButton.hidden = NO;
-//    self.stopButton.hidden = NO;
+    //    self.recordPauseButton.hidden = NO;
+    //    self.playButton.hidden = NO;
+    //    self.stopButton.hidden = NO;
 }
 
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
-    [self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
+    //[self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
     
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
-    [self.player setDelegate:self];
-    [self.player play];
+    //play responses
+    //self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
+    //[self.player setDelegate:self];
+    //[self.player play];
     
     NSData *audioData = [[NSData alloc] initWithContentsOfFile:self.recorder.url.path];
     
@@ -297,6 +390,7 @@ int getRandomInteger(int minimum, int maximum) {
         }
     }
     
+    //lst file
     NSString *listContents = @"";
     for (NSString *string in self.keyArray) {
         NSString *tmp = [NSString stringWithFormat:@"%@\n",string];
@@ -333,22 +427,25 @@ int getRandomInteger(int minimum, int maximum) {
     [session disconnect];
     
     
-}
-
-- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-
     
     //increment loop
     self.loopNumber = [NSNumber numberWithInt:[self.loopNumber intValue] + 1];
     
     if ([self.loopNumber integerValue] == 1) {
         NSLog(@"loop");
-        self.wordShow.text = [NSString stringWithFormat:@"Are you ready for part 1 (if not, please tell the proctor)"];
+        self.wordShow.text = [NSString stringWithFormat:@"Are you ready for part 1?"];
+        self.agreeButton.hidden = NO;
+        
+    } else if ([self.loopNumber integerValue] == 22) {
+        self.wordShow.text = [NSString stringWithFormat:@"You Are Done! Inform your Proctor"];
+        self.agreeButton.hidden = YES;
     } else {
-    
-    self.wordShow.text = [NSString stringWithFormat:@"Are you ready for part %@",self.loopNumber];
+        self.wordShow.text = [NSString stringWithFormat:@"Are you ready for part %@",self.loopNumber];
+        self.agreeButton.hidden = NO;
+        
     }
-    self.agreeButton.hidden = NO;
+    
+    
 }
 
 - (IBAction)agreeButton:(id)sender {
@@ -361,7 +458,78 @@ int getRandomInteger(int minimum, int maximum) {
     self.stopButton.hidden = YES;
     self.recordPauseButton.hidden = YES;
     
-    [self startWordDisplay];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.2
+                                     target:self
+                                   selector:@selector(countDown:)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+
+//    
+//    //increment loop
+//    self.loopNumber = [NSNumber numberWithInt:[self.loopNumber intValue] + 1];
+//    
+//    if ([self.loopNumber integerValue] == 1) {
+//        NSLog(@"loop");
+//        self.wordShow.text = [NSString stringWithFormat:@"Are you ready for part 1 (if not, please tell the proctor)"];
+//        self.agreeButton.hidden = NO;
+//
+//    } else if ([self.loopNumber integerValue] == 22) {
+//        self.wordShow.text = [NSString stringWithFormat:@"You Are Done! Inform your Proctor"];
+//        self.agreeButton.hidden = YES;
+//    } else {
+//        self.wordShow.text = [NSString stringWithFormat:@"Are you ready for part %@",self.loopNumber];
+//        self.agreeButton.hidden = NO;
+//
+//    }
+}
+//
+
+- (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
+    NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
+}
+
+- (void) pocketsphinxDidStartListening {
+    NSLog(@"Pocketsphinx is now listening.");
+}
+
+- (void) pocketsphinxDidDetectSpeech {
+    NSLog(@"Pocketsphinx has detected speech.");
+}
+
+- (void) pocketsphinxDidDetectFinishedSpeech {
+    NSLog(@"Pocketsphinx has detected a period of silence, concluding an utterance.");
+}
+
+- (void) pocketsphinxDidStopListening {
+    NSLog(@"Pocketsphinx has stopped listening.");
+}
+
+- (void) pocketsphinxDidSuspendRecognition {
+    NSLog(@"Pocketsphinx has suspended recognition.");
+}
+
+- (void) pocketsphinxDidResumeRecognition {
+    NSLog(@"Pocketsphinx has resumed recognition.");
+}
+
+- (void) pocketsphinxDidChangeLanguageModelToFile:(NSString *)newLanguageModelPathAsString andDictionary:(NSString *)newDictionaryPathAsString {
+    NSLog(@"Pocketsphinx is now using the following language model: \n%@ and the following dictionary: %@",newLanguageModelPathAsString,newDictionaryPathAsString);
+}
+
+- (void) pocketSphinxContinuousSetupDidFailWithReason:(NSString *)reasonForFailure {
+    NSLog(@"Listening setup wasn't successful and returned the failure reason: %@", reasonForFailure);
+}
+
+- (void) pocketSphinxContinuousTeardownDidFailWithReason:(NSString *)reasonForFailure {
+    NSLog(@"Listening teardown wasn't successful and returned the failure reason: %@", reasonForFailure);
+}
+
+- (void) testRecognitionCompleted {
+    NSLog(@"A test file that was submitted for recognition is now complete.");
 }
 
 

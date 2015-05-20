@@ -7,11 +7,13 @@
 //
 
 #import "FreeRecall0.h"
-#import <AVFoundation/AVAudioSession.h>
+#import <AVFoundation/AVFoundation.h>
 #import "FreeRecallWordShow.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface FreeRecall0 ()
+#define RECORD_LENGTH 5
+
+@interface FreeRecall0 () <AVAudioSessionDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *affirmButton;
 @property (weak, nonatomic) IBOutlet UITextView *instructionText;
 @property (strong, nonatomic) NSArray *keyArray;
@@ -19,8 +21,12 @@
 
 @property (strong,nonatomic) NSString *instructString;
 @property (strong,nonatomic) NSString *micString;
+@property (strong,nonatomic) NSString *micTestString;
 @property (strong,nonatomic) NSString *movieString;
 @property (strong,nonatomic) NSString *experimentString;
+
+@property AVAudioRecorder *recorder;
+@property AVAudioPlayer *player;
 
 
 
@@ -35,6 +41,7 @@
     self.micString = @"Allow Mic Access";
     self.movieString = @"Watch Movie";
     self.experimentString = @"Continue to Demo";
+    self.micTestString = @"";
     
     NSDictionary *wordList = [NSDictionary dictionaryWithObjectsAndKeys:
                       @"11111", @"word1",
@@ -71,6 +78,35 @@
     
     self.keyArray = arr;
     self.wordList = wordList;
+    
+    
+    
+    
+    
+    // Set the audio file
+    NSArray *pathComponents = [NSArray arrayWithObjects:
+                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                               @"MyAudioMemo.wav",
+                               nil];
+    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+    
+    // Setup audio session
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    
+    // Define the recorder setting
+    NSDictionary *audioSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   [NSNumber numberWithFloat:44100],AVSampleRateKey,
+                                   [NSNumber numberWithInt: kAudioFormatLinearPCM],AVFormatIDKey,
+                                   [NSNumber numberWithInt: 1],AVNumberOfChannelsKey,
+                                   [NSNumber numberWithInt:AVAudioQualityMedium],AVEncoderAudioQualityKey,nil];
+    
+    
+    // Initiate and prepare the recorder
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:audioSettings error:NULL];
+    self.recorder.delegate = self;
+    self.recorder.meteringEnabled = YES;
+    [self.recorder prepareToRecord];
     
 }
 - (IBAction)clickButton:(id)sender {
@@ -144,13 +180,38 @@
         [vc.moviePlayer prepareToPlay];
         [vc.moviePlayer play];
         
+        self.instructionText.text = @"We are now going to test the Microphone. Press the button below to start recording and say anything into the mic.";
+        self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
+        self.instructionText.textAlignment = NSTextAlignmentCenter;
         
-        self.instructionText.text = @"Please talk to the proctor if you have any questions. You will now go through a short demo session of the experiment.";
+        [self.affirmButton setTitle:@"Start Mic Test" forState:UIControlStateNormal];
+        
+       
+    } else if ([self.affirmButton.currentTitle isEqualToString:@"Start Mic Test"]) {
+        self.instructionText.text = @"Recording... Talk now";
+        self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
+        self.instructionText.textAlignment = NSTextAlignmentCenter;
+        
+        //time to record
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setActive:YES error:nil];
+        
+        NSLog(@"before recording");
+        // Start recording
+        [self.recorder recordForDuration:RECORD_LENGTH];
+        
+        NSLog(@"after recording");
+        
+        self.affirmButton.hidden = YES;
+
+    } else if ([self.affirmButton.currentTitle isEqualToString:@"I heard something"]) {
+        
+        self.instructionText.text = @"Great! Please talk to the proctor if you have any questions. You will now go through a short demo session of the experiment.";
         self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
         self.instructionText.textAlignment = NSTextAlignmentCenter;
         
         [self.affirmButton setTitle:self.experimentString forState:UIControlStateNormal];
-        
+
     } else if ([self.affirmButton.currentTitle isEqualToString:self.experimentString]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"list" sender:self];
@@ -159,10 +220,34 @@
     }
 }
 
+
+- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
+    self.instructionText.text = @"Playing";
+    self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
+    self.instructionText.textAlignment = NSTextAlignmentCenter;
+    
+    //play responses
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
+    [self.player setDelegate:self];
+    [self.player play];
+}
+
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+
+    self.instructionText.text = @"Tell the proctor if you didn't hear anything";
+    self.instructionText.font = [UIFont boldSystemFontOfSize:20.0];
+    self.instructionText.textAlignment = NSTextAlignmentCenter;
+    self.affirmButton.hidden = NO;
+    [self.affirmButton setTitle:@"I heard something" forState:UIControlStateNormal];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 
 #pragma mark - Navigation

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="S4n-js-IC4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="S4n-js-IC4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -181,21 +181,31 @@ After the last word in each list, you will be shown several math problems. Answe
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4O-Up-Grt">
-                                <rect key="frame" x="289" y="276" width="23" height="47"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="39"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 + 1 + 1 =" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sm3-8F-NDX">
                                 <rect key="frame" x="180" y="260" width="109" height="21"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="194" id="HaE-zc-BrF"/>
                                     <constraint firstAttribute="height" constant="21" id="Iih-uv-uT9"/>
                                     <constraint firstAttribute="width" constant="109" id="dWv-2g-yDZ"/>
+                                    <constraint firstAttribute="height" constant="35" id="vQk-4t-51x"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="39"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="HaE-zc-BrF"/>
+                                        <exclude reference="vQk-4t-51x"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="HaE-zc-BrF"/>
+                                        <exclude reference="Iih-uv-uT9"/>
+                                        <exclude reference="dWv-2g-yDZ"/>
+                                        <include reference="vQk-4t-51x"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ll3-Fv-po5">
                                 <rect key="frame" x="180" y="115" width="240" height="128"/>
@@ -208,45 +218,11 @@ After the last word in each list, you will be shown several math problems. Answe
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xd8-0B-dOe">
-                                <rect key="frame" x="289" y="256" width="49" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="49" id="zgi-0Q-Wfk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DA-P5-TFM">
-                                <rect key="frame" x="390" y="447" width="30" height="30"/>
-                                <state key="normal" title="Play">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playTapped:" destination="ecU-jp-kP7" eventType="touchUpInside" id="cz6-fx-AQk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMR-Ps-9OR">
-                                <rect key="frame" x="180" y="447" width="33" height="30"/>
-                                <state key="normal" title="Stop">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="stopTapped:" destination="ecU-jp-kP7" eventType="touchUpInside" id="Fdx-tj-5EH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNf-ut-OiE">
-                                <rect key="frame" x="277" y="496" width="50" height="30"/>
-                                <state key="normal" title="Record">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="recordPauseTapped:" destination="ecU-jp-kP7" eventType="touchUpInside" id="bpJ-qT-GkK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAR-bs-6Tg">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAR-bs-6Tg">
                                 <rect key="frame" x="263" y="346" width="74" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="185" id="Mgi-1P-9MT"/>
+                                    <constraint firstAttribute="height" constant="30" id="5mR-ZR-4hq"/>
+                                    <constraint firstAttribute="width" constant="185" id="i5p-ub-1Iz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="I'm Ready!">
@@ -254,58 +230,113 @@ After the last word in each list, you will be shown several math problems. Answe
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Mgi-1P-9MT"/>
+                                        <exclude reference="5mR-ZR-4hq"/>
+                                        <exclude reference="i5p-ub-1Iz"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=regular">
                                     <mask key="constraints">
-                                        <include reference="Mgi-1P-9MT"/>
+                                        <include reference="5mR-ZR-4hq"/>
+                                        <include reference="i5p-ub-1Iz"/>
                                     </mask>
                                 </variation>
                                 <connections>
                                     <action selector="agreeButton:" destination="ecU-jp-kP7" eventType="touchUpInside" id="3iv-EN-Q44"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xd8-0B-dOe">
+                                <rect key="frame" x="289" y="256" width="49" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="RW5-GZ-EDY"/>
+                                    <constraint firstAttribute="width" constant="49" id="zgi-0Q-Wfk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="RW5-GZ-EDY"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="RW5-GZ-EDY"/>
+                                        <exclude reference="zgi-0Q-Wfk"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4O-Up-Grt">
+                                <rect key="frame" x="289" y="276" width="23" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="768" id="5Dt-pn-NJH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5Dt-pn-NJH"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="5Dt-pn-NJH"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IAR-bs-6Tg" firstAttribute="top" secondItem="N4O-Up-Grt" secondAttribute="bottom" constant="23" id="1UK-3C-Gmp"/>
-                            <constraint firstAttribute="centerX" secondItem="vNf-ut-OiE" secondAttribute="centerX" constant="-2" id="2kp-S3-7mP"/>
+                            <constraint firstAttribute="centerX" secondItem="Sm3-8F-NDX" secondAttribute="centerX" constant="55" id="2Mg-zQ-751"/>
                             <constraint firstAttribute="centerX" secondItem="N4O-Up-Grt" secondAttribute="centerX" constant="-0.5" id="2q9-tQ-Ai4"/>
-                            <constraint firstItem="IAR-bs-6Tg" firstAttribute="top" secondItem="N4O-Up-Grt" secondAttribute="bottom" constant="23" id="6wI-7W-7bw"/>
-                            <constraint firstItem="6DA-P5-TFM" firstAttribute="top" secondItem="IAR-bs-6Tg" secondAttribute="bottom" constant="71" id="8sW-nR-3d0"/>
-                            <constraint firstAttribute="centerY" secondItem="vNf-ut-OiE" secondAttribute="centerY" constant="-211" id="Bf8-hw-yqe"/>
-                            <constraint firstItem="6DA-P5-TFM" firstAttribute="top" secondItem="N4O-Up-Grt" secondAttribute="bottom" constant="124" id="J0o-Hz-LpL"/>
-                            <constraint firstItem="6DA-P5-TFM" firstAttribute="leading" secondItem="N4O-Up-Grt" secondAttribute="trailing" constant="78" id="JXB-nM-LSr"/>
+                            <constraint firstItem="Xd8-0B-dOe" firstAttribute="leading" secondItem="Sm3-8F-NDX" secondAttribute="trailing" constant="2" id="4g9-KO-naa"/>
+                            <constraint firstItem="N4O-Up-Grt" firstAttribute="top" secondItem="Sm3-8F-NDX" secondAttribute="bottom" constant="-7" id="Ez5-Ne-8T2"/>
+                            <constraint firstAttribute="centerY" secondItem="N4O-Up-Grt" secondAttribute="centerY" constant="0.5" id="PZc-cv-DO1"/>
                             <constraint firstItem="Xd8-0B-dOe" firstAttribute="top" secondItem="Ll3-Fv-po5" secondAttribute="bottom" constant="13" id="QE8-gZ-oPQ"/>
                             <constraint firstAttribute="centerY" secondItem="Ll3-Fv-po5" secondAttribute="centerY" constant="121" id="Qdp-nW-LbK"/>
+                            <constraint firstAttribute="centerY" secondItem="IAR-bs-6Tg" secondAttribute="centerY" constant="-61" id="VS5-yX-2Zw"/>
                             <constraint firstItem="N4O-Up-Grt" firstAttribute="leading" secondItem="Sm3-8F-NDX" secondAttribute="trailing" id="WFz-ZX-hPc"/>
+                            <constraint firstAttribute="centerX" secondItem="IAR-bs-6Tg" secondAttribute="centerX" constant="-0.5" id="cyQ-FP-YcV"/>
+                            <constraint firstAttribute="centerX" secondItem="N4O-Up-Grt" secondAttribute="centerX" id="eHg-9j-qnh"/>
                             <constraint firstAttribute="centerX" secondItem="Ll3-Fv-po5" secondAttribute="centerX" id="fh4-Ga-did"/>
-                            <constraint firstItem="vNf-ut-OiE" firstAttribute="top" secondItem="N4O-Up-Grt" secondAttribute="bottom" constant="173" id="gJn-s0-Mc4"/>
                             <constraint firstAttribute="centerY" secondItem="IAR-bs-6Tg" secondAttribute="centerY" constant="-61" id="h67-E0-tZr"/>
-                            <constraint firstItem="IAR-bs-6Tg" firstAttribute="centerX" secondItem="Xd8-0B-dOe" secondAttribute="centerX" id="hbL-gC-w6z"/>
-                            <constraint firstItem="TMR-Ps-9OR" firstAttribute="top" secondItem="N4O-Up-Grt" secondAttribute="bottom" constant="124" id="k7B-Uq-Gpm"/>
+                            <constraint firstItem="N4O-Up-Grt" firstAttribute="top" secondItem="Xd8-0B-dOe" secondAttribute="bottom" constant="-7" id="iGi-RP-FbX"/>
                             <constraint firstAttribute="centerY" secondItem="N4O-Up-Grt" secondAttribute="centerY" constant="0.5" id="sTU-xv-WKc"/>
                             <constraint firstItem="Sm3-8F-NDX" firstAttribute="top" secondItem="Ll3-Fv-po5" secondAttribute="bottom" constant="17" id="u33-ME-WyU"/>
                             <constraint firstItem="Xd8-0B-dOe" firstAttribute="leading" secondItem="Sm3-8F-NDX" secondAttribute="trailing" id="wAe-h9-WA9"/>
-                            <constraint firstItem="N4O-Up-Grt" firstAttribute="leading" secondItem="TMR-Ps-9OR" secondAttribute="trailing" constant="76" id="wEx-Gl-IIw"/>
                             <constraint firstAttribute="centerX" secondItem="IAR-bs-6Tg" secondAttribute="centerX" id="z40-y6-36c"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="6wI-7W-7bw"/>
-                                <exclude reference="hbL-gC-w6z"/>
-                                <exclude reference="8sW-nR-3d0"/>
+                                <exclude reference="2Mg-zQ-751"/>
+                                <exclude reference="4g9-KO-naa"/>
+                                <exclude reference="Ez5-Ne-8T2"/>
+                                <exclude reference="PZc-cv-DO1"/>
+                                <exclude reference="eHg-9j-qnh"/>
+                                <exclude reference="iGi-RP-FbX"/>
+                                <exclude reference="VS5-yX-2Zw"/>
+                                <exclude reference="cyQ-FP-YcV"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
                             <mask key="constraints">
+                                <include reference="2Mg-zQ-751"/>
+                                <exclude reference="u33-ME-WyU"/>
+                                <include reference="4g9-KO-naa"/>
+                                <exclude reference="QE8-gZ-oPQ"/>
+                                <exclude reference="wAe-h9-WA9"/>
+                                <exclude reference="2q9-tQ-Ai4"/>
+                                <include reference="Ez5-Ne-8T2"/>
+                                <include reference="PZc-cv-DO1"/>
+                                <exclude reference="WFz-ZX-hPc"/>
+                                <include reference="eHg-9j-qnh"/>
+                                <include reference="iGi-RP-FbX"/>
+                                <exclude reference="sTU-xv-WKc"/>
                                 <exclude reference="1UK-3C-Gmp"/>
-                                <include reference="6wI-7W-7bw"/>
+                                <include reference="VS5-yX-2Zw"/>
+                                <include reference="cyQ-FP-YcV"/>
                                 <exclude reference="h67-E0-tZr"/>
-                                <include reference="hbL-gC-w6z"/>
                                 <exclude reference="z40-y6-36c"/>
-                                <include reference="8sW-nR-3d0"/>
                             </mask>
                         </variation>
                     </view>
@@ -313,9 +344,6 @@ After the last word in each list, you will be shown several math problems. Answe
                         <outlet property="agreeButton" destination="IAR-bs-6Tg" id="ASE-el-Ja7"/>
                         <outlet property="mathInput" destination="Xd8-0B-dOe" id="gMJ-Ls-MMg"/>
                         <outlet property="mathProblem" destination="Sm3-8F-NDX" id="VIp-Ih-7O1"/>
-                        <outlet property="playButton" destination="6DA-P5-TFM" id="ZTv-w7-5uY"/>
-                        <outlet property="recordPauseButton" destination="vNf-ut-OiE" id="oqM-Jk-p6M"/>
-                        <outlet property="stopButton" destination="TMR-Ps-9OR" id="gZ8-Tj-hNj"/>
                         <outlet property="textOut" destination="Ll3-Fv-po5" id="pyN-xr-TB3"/>
                         <outlet property="wordShow" destination="N4O-Up-Grt" id="Mty-Ld-B7D"/>
                     </connections>

@@ -11,6 +11,7 @@
 		1806BDBC1A9291CB00C4A5C5 /* SignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 1806BDBB1A9291CB00C4A5C5 /* SignUp.m */; };
 		182058221AD5A259009D772F /* instructions.mov in Resources */ = {isa = PBXBuildFile; fileRef = 182058211AD5A259009D772F /* instructions.mov */; };
 		182058241AD5AE5F009D772F /* 0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182058231AD5AE5F009D772F /* 0.txt */; };
+		182058271AD5D69F009D772F /* NSMutableArray+shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 182058261AD5D69F009D772F /* NSMutableArray+shuffle.m */; };
 		182ED20C1ACC7819002EE712 /* 3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED1FC1ACC7819002EE712 /* 3.txt */; };
 		182ED20D1ACC7819002EE712 /* 4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED1FD1ACC7819002EE712 /* 4.txt */; };
 		182ED20E1ACC7819002EE712 /* 5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 182ED1FE1ACC7819002EE712 /* 5.txt */; };
@@ -30,6 +31,11 @@
 		182ED2511AD33489002EE712 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 182ED2501AD33489002EE712 /* MediaPlayer.framework */; };
 		185156E11AC3439500E97F80 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 185156DF1AC3439500E97F80 /* 1.txt */; };
 		185156E21AC3439500E97F80 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 185156E01AC3439500E97F80 /* 2.txt */; };
+		188428481AE81E8A00B22A1E /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 188428441AE81E8A00B22A1E /* AcousticModelEnglish.bundle */; };
+		188428491AE81E8A00B22A1E /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 188428451AE81E8A00B22A1E /* AcousticModelSpanish.bundle */; };
+		1884284A1AE81E8A00B22A1E /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188428461AE81E8A00B22A1E /* OpenEars.framework */; };
+		1884284B1AE81E8B00B22A1E /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188428471AE81E8A00B22A1E /* Slt.framework */; };
+		1884284D1AE82CE700B22A1E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1884284C1AE82CE700B22A1E /* AudioToolbox.framework */; };
 		18EDFCB91A82B2C300F2576F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDFCB81A82B2C300F2576F /* main.m */; };
 		18EDFCBC1A82B2C300F2576F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDFCBB1A82B2C300F2576F /* AppDelegate.m */; };
 		18EDFCBF1A82B2C300F2576F /* iEPL.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18EDFCBD1A82B2C300F2576F /* iEPL.xcdatamodeld */; };
@@ -63,6 +69,8 @@
 		1806BDBB1A9291CB00C4A5C5 /* SignUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUp.m; sourceTree = "<group>"; };
 		182058211AD5A259009D772F /* instructions.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = instructions.mov; sourceTree = "<group>"; };
 		182058231AD5AE5F009D772F /* 0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 0.txt; sourceTree = "<group>"; };
+		182058251AD5D69F009D772F /* NSMutableArray+shuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+shuffle.h"; sourceTree = "<group>"; };
+		182058261AD5D69F009D772F /* NSMutableArray+shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+shuffle.m"; sourceTree = "<group>"; };
 		182ED1FC1ACC7819002EE712 /* 3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3.txt; sourceTree = "<group>"; };
 		182ED1FD1ACC7819002EE712 /* 4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 4.txt; sourceTree = "<group>"; };
 		182ED1FE1ACC7819002EE712 /* 5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5.txt; sourceTree = "<group>"; };
@@ -82,6 +90,11 @@
 		182ED2501AD33489002EE712 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		185156DF1AC3439500E97F80 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 		185156E01AC3439500E97F80 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
+		188428441AE81E8A00B22A1E /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
+		188428451AE81E8A00B22A1E /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
+		188428461AE81E8A00B22A1E /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
+		188428471AE81E8A00B22A1E /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
+		1884284C1AE82CE700B22A1E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		18EDFCB31A82B2C300F2576F /* iEPL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEPL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EDFCB71A82B2C300F2576F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18EDFCB81A82B2C300F2576F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -111,11 +124,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1884284D1AE82CE700B22A1E /* AudioToolbox.framework in Frameworks */,
 				182ED2511AD33489002EE712 /* MediaPlayer.framework in Frameworks */,
+				1884284B1AE81E8B00B22A1E /* Slt.framework in Frameworks */,
 				18FDC4001AB7812500F509C2 /* CFNetwork.framework in Frameworks */,
 				18FDC3FE1AB7811B00F509C2 /* libz.dylib in Frameworks */,
 				18FDC3FC1AB7807200F509C2 /* NMSSH.framework in Frameworks */,
 				18EDFCE91A82C0ED00F2576F /* AVFoundation.framework in Frameworks */,
+				1884284A1AE81E8A00B22A1E /* OpenEars.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,9 +145,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		188428431AE81E8A00B22A1E /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				188428441AE81E8A00B22A1E /* AcousticModelEnglish.bundle */,
+				188428451AE81E8A00B22A1E /* AcousticModelSpanish.bundle */,
+				188428461AE81E8A00B22A1E /* OpenEars.framework */,
+				188428471AE81E8A00B22A1E /* Slt.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 		18EDFCAA1A82B2C300F2576F = {
 			isa = PBXGroup;
 			children = (
+				1884284C1AE82CE700B22A1E /* AudioToolbox.framework */,
+				188428431AE81E8A00B22A1E /* Framework */,
 				182ED2501AD33489002EE712 /* MediaPlayer.framework */,
 				18FDC3FF1AB7812500F509C2 /* CFNetwork.framework */,
 				18FDC3FD1AB7811B00F509C2 /* libz.dylib */,
@@ -186,6 +215,8 @@
 				18EDFCC61A82B2C300F2576F /* Main.storyboard */,
 				18F7CD351A8BE59700177FEB /* FreeRecallWordShow.h */,
 				18F7CD361A8BE59700177FEB /* FreeRecallWordShow.m */,
+				182058251AD5D69F009D772F /* NSMutableArray+shuffle.h */,
+				182058261AD5D69F009D772F /* NSMutableArray+shuffle.m */,
 				18EDFCEA1A82D30600F2576F /* HomeScreen.h */,
 				18EDFCEB1A82D30600F2576F /* HomeScreen.m */,
 				18EDFCC91A82B2C300F2576F /* Images.xcassets */,
@@ -309,9 +340,11 @@
 				182058221AD5A259009D772F /* instructions.mov in Resources */,
 				182ED2191ACC7819002EE712 /* 16.txt in Resources */,
 				182ED2121ACC7819002EE712 /* 9.txt in Resources */,
+				188428491AE81E8A00B22A1E /* AcousticModelSpanish.bundle in Resources */,
 				182ED2181ACC7819002EE712 /* 15.txt in Resources */,
 				182ED2141ACC7819002EE712 /* 11.txt in Resources */,
 				182ED2111ACC7819002EE712 /* 8.txt in Resources */,
+				188428481AE81E8A00B22A1E /* AcousticModelEnglish.bundle in Resources */,
 				182ED20F1ACC7819002EE712 /* 6.txt in Resources */,
 				182058241AD5AE5F009D772F /* 0.txt in Resources */,
 				182ED2171ACC7819002EE712 /* 14.txt in Resources */,
@@ -343,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				182058271AD5D69F009D772F /* NSMutableArray+shuffle.m in Sources */,
 				18EDFCBF1A82B2C300F2576F /* iEPL.xcdatamodeld in Sources */,
 				1806BDBC1A9291CB00C4A5C5 /* SignUp.m in Sources */,
 				1806BDB91A928F6500C4A5C5 /* LogIn.m in Sources */,
@@ -479,6 +513,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iEPL",
+					"$(PROJECT_DIR)/Framework",
 				);
 				INFOPLIST_FILE = iEPL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -496,6 +531,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iEPL",
+					"$(PROJECT_DIR)/Framework",
 				);
 				INFOPLIST_FILE = iEPL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
