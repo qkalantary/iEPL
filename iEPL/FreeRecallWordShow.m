@@ -147,15 +147,16 @@
                                                      error:NULL];
     
 
-    
+    //separating text file into lines
     NSString *sepLine = @"\n";
     NSCharacterSet *setLine = [NSCharacterSet characterSetWithCharactersInString:sepLine];
     NSArray *lineArray=[content componentsSeparatedByCharactersInSet:setLine];
     NSLog(@"lineArray=%@",lineArray);
-    int lineArrayRandomNumber = getRandomInteger(0, 24);
     
+    int lineArrayRandomNumber = getRandomInteger(0, 24);
     NSString *wordString = lineArray[lineArrayRandomNumber];
     
+    //separate lines into words
     NSString *sepWord = @"\t";
     NSCharacterSet *setWord = [NSCharacterSet characterSetWithCharactersInString:sepWord];
     NSArray *wordArray=[wordString componentsSeparatedByCharactersInSet:setWord];
@@ -166,8 +167,10 @@
             [mut addObject:wordArray[i]];
     }
     
+    //shuffle the array
     [mut shuffle];
     
+    //add + at first spot in array
     [mut insertObject:@"+" atIndex:0];
     
     NSLog(@"after shuffle=%@", mut);
@@ -256,6 +259,7 @@ int getRandomInteger(int minimum, int maximum) {
     [self displayMath];
     
     //configure timing for mathDisplay
+    //this calls endMathDisplay
     [NSTimer scheduledTimerWithTimeInterval:MATH_LENGTH
                                      target:self
                                    selector:@selector(endMathDisplay:)
@@ -265,7 +269,6 @@ int getRandomInteger(int minimum, int maximum) {
 }
 
 -(void)displayMath {
-    //static int i;
     
     int x = getRandomInteger(1, 9);
     int y = getRandomInteger(1, 9);
@@ -278,12 +281,6 @@ int getRandomInteger(int minimum, int maximum) {
     self.wordShow.hidden = YES;
     self.mathProblem.hidden = NO;
     self.mathInput.hidden = NO;
-    
-    
-    //i++;
-    //if (i > 20) {
-    //  i = 0;
-    //}
     
     [self.mathInput becomeFirstResponder];
 }
@@ -362,28 +359,18 @@ int getRandomInteger(int minimum, int maximum) {
     [self.recorder recordForDuration:RECORD_LENGTH];
     
     NSLog(@"after recording");
-    
-    
-    //    self.recordPauseButton.hidden = NO;
-    //    self.playButton.hidden = NO;
-    //    self.stopButton.hidden = NO;
 }
 
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
-    //[self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
-    
-    //play responses
-    //self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
-    //[self.player setDelegate:self];
-    //[self.player play];
     
     NSData *audioData = [[NSData alloc] initWithContentsOfFile:self.recorder.url.path];
     
-    NMSSHSession *session = [NMSSHSession connectToHost:@"@rhino.psych.upenn.edu"
-                                           withUsername:@"qkal"];
+    //put in username and password HERE
+    NMSSHSession *session = [NMSSHSession connectToHost:@""
+                                           withUsername:@""];
     
     if (session.isConnected) {
-        [session authenticateByPassword:@"Qpiano!1231"];
+        [session authenticateByPassword:@""];
         
         if (session.isAuthorized) {
             NSLog(@"Authentication succeeded");
@@ -406,6 +393,8 @@ int getRandomInteger(int minimum, int maximum) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int loopInt = (int)[self.loopNumber integerValue];
     int userName = (int)[defaults integerForKey:@"userName"];
+    
+    //put in directory names
     NSString *newDirectoryA = [NSString stringWithFormat:@"/home2/qkal/iEPL/LTP%i",userName];
     NSString *newDirectoryB = [NSString stringWithFormat:@"/home2/qkal/iEPL/LTP%i/session%i",userName,loopInt];
     NSString *audioString = [NSString stringWithFormat:@"/home2/qkal/iEPL/LTP%i/session%i/audio.wav",userName,loopInt];
